@@ -46,15 +46,12 @@
         <canvas id="gameCanvas" style="display:none;"></canvas>
 
         <!-- Controles móviles (solo visibles en celular o juego activo) -->
-        <!-- Controles móviles (solo visibles cuando el juego está activo) -->
-        <div id="mobileControls"
-            style="display:none; position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;">
+        <div id="mobileControls" style="display:none;" class="mobile-controls">
             <button onclick="moveLeft()">⬅️</button>
             <button onclick="rotatePiece()">🔄</button>
             <button onclick="moveRight()">➡️</button>
             <button onclick="hardDrop()">⬇️</button>
         </div>
-
 
         <!-- Overlay de pausa -->
         <div id="pauseOverlay"
