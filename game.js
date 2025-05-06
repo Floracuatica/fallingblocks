@@ -62,7 +62,7 @@ const tetrominos = [
     [[0, 1, 1], [1, 1, 0]],
     [[1, 1, 0], [0, 1, 1]],
     [[0, 1, 0], [1, 1, 1]],
-    [[0, 0, 1], [0, 1, 0], [1, 0, 0]], 
+    [[0, 0, 1], [0, 1, 0], [1, 0, 0]],
 ];
 
 let currentPiece = getRandomPiece();
@@ -121,6 +121,26 @@ function drawBackground() {
         ctx.fillStyle = "#fff5e6";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
+}
+
+function moveLeft() {
+    if (isValidMove(-1, 0)) currentPiece.x--;
+}
+
+function moveRight() {
+    if (isValidMove(1, 0)) currentPiece.x++;
+}
+
+function rotatePiece() {
+    const rotated = rotate(currentPiece.shape);
+    if (!rotationCollision(rotated)) currentPiece.shape = rotated;
+}
+
+function hardDrop() {
+    while (!collision()) currentPiece.y++;
+    currentPiece.y--;
+    fixToBoard();
+    currentPiece = getRandomPiece();
 }
 
 document.querySelectorAll('input[name="background"]').forEach(radio => {
@@ -346,6 +366,8 @@ function startGame() {
     canvas.style.display = "block";
     document.getElementById("startScreen").style.display = "none";
     soundToggle.style.display = "block";
+    document.getElementById("mobileControls").style.display = "block";
+
 }
 
 function showStartScreen() {
@@ -353,6 +375,7 @@ function showStartScreen() {
     document.getElementById("startScreen").style.display = "block";
     document.getElementById("backgroundSelector").style.display = "block"; // Mostrar selector al volver al inicio
     soundToggle.style.display = "none";
+    document.getElementById("mobileControls").style.display = "none";
 }
 
 function endGame() {
