@@ -350,11 +350,15 @@ function update(time = 0) {
     requestAnimationFrame(update);
 }
 
-function startGame() {
-    playing = true; // Activar bandera de que el juego está en curso
+function isMobile() {
+    return window.innerWidth <= 768;
+}
 
-    document.getElementById("backgroundSelector").style.display = "none"; // Ocultar selector al jugar
-    applyBackground(); // Aplicar el fondo elegido
+function startGame() {
+    playing = true;
+
+    document.getElementById("backgroundSelector").style.display = "none";
+    applyBackground();
 
     loseMusic.pause();
     loseMusic.currentTime = 0;
@@ -366,17 +370,23 @@ function startGame() {
     canvas.style.display = "block";
     document.getElementById("startScreen").style.display = "none";
     soundToggle.style.display = "block";
-    document.getElementById("mobileControls").style.display = "block";
 
+    // Mostrar solo si es móvil
+    if (isMobile()) {
+        document.getElementById("mobileControls").classList.add("show");
+    }
 }
 
 function showStartScreen() {
     canvas.style.display = "none";
     document.getElementById("startScreen").style.display = "block";
-    document.getElementById("backgroundSelector").style.display = "block"; // Mostrar selector al volver al inicio
+    document.getElementById("backgroundSelector").style.display = "block";
     soundToggle.style.display = "none";
-    document.getElementById("mobileControls").style.display = "none";
+
+    // Siempre ocultar
+    document.getElementById("mobileControls").classList.remove("show");
 }
+
 
 function endGame() {
     playing = false;
