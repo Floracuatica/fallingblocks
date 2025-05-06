@@ -61,9 +61,26 @@ button:hover {
     margin-right: 5px;
 }
 
-#mobileControls button {
-    font-size: 24px;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 50%;
+
+.mobile-controls {
+    text-align: center;
+    margin-top: 10px;
+    gap: 10px;
+    display: none;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.mobile-controls.show {
+    display: flex !important; /* <-- IMPORTANTE para forzarlo y que no importe el media query */
+}
+
+@media (min-width: 769px) {
+    .mobile-controls {
+        display: none !important;
+    }
 }
